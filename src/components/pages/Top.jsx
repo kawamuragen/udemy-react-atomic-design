@@ -1,12 +1,16 @@
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 import { SecondaryButton } from "../atoms/button/SecondaryButton";
-import { useContext } from "react";
-import { UserContext } from "../../providers/UserProvider";
+// import { useContext } from "react";
+// import { UserContext } from "../../providers/UserProvider";
+import { useSetRecoilState } from "recoil";
+import { userState } from "../../store/userState";
 
 export const Top = () => {
   const history = useHistory();
-  const { setUserInfo } = useContext(UserContext);
+  // const { setUserInfo } = useContext(UserContext);
+  const setUserInfo = useSetRecoilState(userState);
+  // 更新関数だけ使っていれば、そのコンポーネントはStateの値が更新されてもレンダリングされない
 
   // 実際のアプリではログイン後にUserInfoを丸々入れるイメージ
   const onClickAdmin = () => {

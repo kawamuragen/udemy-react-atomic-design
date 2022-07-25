@@ -1,11 +1,17 @@
-import { useContext } from "react";
+import { memo } from "react";
+// import { useContext } from "react";
 import styled from "styled-components";
-import { UserContext } from "../../../providers/UserProvider";
+// import { UserContext } from "../../../providers/UserProvider";
+import { useRecoilValue } from "recoil";
+import { userState } from "../../../store/userState";
 
-export const UserIconWithName = (props) => {
+export const UserIconWithName = memo((props) => {
+  // console.log("UserIconWithName");
+
   const { image, name } = props;
   // 作成したコンテキストをuseContextにわたすことで、コンテキストを取得できる
-  const { userInfo } = useContext(UserContext);
+  // const { userInfo } = useContext(UserContext);
+  const userInfo = useRecoilValue(userState);
   // console.log(context); // {contextName: "じゃけえ"}
   const isAdmin = userInfo ? userInfo.isAdmin : false;
 
@@ -16,7 +22,7 @@ export const UserIconWithName = (props) => {
       {isAdmin && <SEdit>編集</SEdit>}
     </SContainer>
   );
-};
+});
 
 const SContainer = styled.div`
   text-align: center;

@@ -1,8 +1,13 @@
+import { memo } from "react";
 import styled from "styled-components";
 import { Card } from "../../atoms/card/Card";
 import { UserIconWithName } from "../../molecules/user/UserIconWithName";
 
-export const UserCard = (props) => {
+export const UserCard = memo((props) => {
+  // Usersの子コンポーネントのため、userInfoが更新されるとレンダリングされてしまう。
+  // memoを使用して再レンダリングされないように修正
+  // console.log("UserCard");
+
   const { user } = props;
   return (
     <Card>
@@ -19,7 +24,7 @@ export const UserCard = (props) => {
       </SDl>
     </Card>
   );
-};
+});
 
 const SDl = styled.dl`
   text-align: left;
